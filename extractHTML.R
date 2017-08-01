@@ -28,11 +28,35 @@ InvName<-gsub("<.*?>","", inv$inv)
 InvName<-gsub(".xfc.xbe.x99.x83.xa0.xb","c", InvName)
 InvName[87]
 head(InvName)
-InvID<-as.data.frame(InvID)
-website<-paste0("http://www.seed-db.com/investorgraph/investorview?investorid=",InvID$InvID)
 
-df<-cbind(InvName,InvID,website)
-write.csv(df, "SeedDB-InvestorNameIDwebsite.csv")
+InvWebsite<-paste0("http://www.seed-db.com/investorgraph/investorview?investorid=",InvID)
+
+df<-cbind(InvName,InvID,InvWebsite)
+
+Acc<-read.csv("AcceleratorIDs.csv", encoding = "Unicode", header = FALSE)
+
+#Remove front tag
+head(Acc)
+Acc<-Acc$V1
+AccID<-gsub("<option value=\"","", Acc)
+head(AccID)
+#Remove name and back tag
+AccID<-gsub(">.*.>","", AccID)
+head(AccID)
+AccID<-gsub("[^0-9]", "", AccID)
+head(AccID)
+AccID<-grep("[0-9]", AccID, value = TRUE)
+head(AccID)
+
+AccName<-gsub("<.*?>","", Acc)
+head(AccName)
+AccWebsite<-paste0("http://www.seed-db.com/investorgraph/acceleratorview?acceleratorid=",AccID)
+AccWebsite[16]
+df2<-cbind(AccName,AccID,AccWebsite)
+
+
+write.csv(df, "InvNameIDwebsite.csv")
+write.csv(df2, "AccNameIDwebsite.csv")
 
 
 #this works 
@@ -51,15 +75,46 @@ write.csv(df, "SeedDB-InvestorNameIDwebsite.csv")
 
 
 #make a function then lapply
+
 library(XML)
+
 get.html <- function(i) {
   print(i)
   try(remove(tbl))
-  try(tbl<- readHTMLTable(website[i], which=1, stringsAsFactors = FALSE))
-  try(write.csv(tbl, paste0("./csv/",InvName[i],".csv")))
+  if(!file.exists(paste0("./inv/",InvID[i],".csv"))){
+    print("File does not exist. Making a new file.")
+    try(tbl<- readHTMLTable(InvWebsite[i], which=1, stringsAsFactors = FALSE))
+    try(write.csv(tbl, paste0("./inv/",InvID[i],".csv")))
+    if(file.exists(paste0("./inv/",InvID[i],".csv"))){
+      print("Success!")
+    }
+    else {print("Failed to create csv")
+    }
+  }else{print("File already exists, skipping to the next file.")}
 }
 
+
 lapply(1:7032,get.html)
+
+
+
+get.html2 <- function(i) {
+  print(i)
+  try(remove(tbl))
+  if(!file.exists(paste0("./acc/",AccID[i],".csv"))){
+    print("File does not exist. Making a new file.")
+    try(tbl<- readHTMLTable(AccWebsite[i], which=1, stringsAsFactors = FALSE))
+    try(write.csv(tbl, paste0("./acc/",AccID[i],".csv")))
+    if(file.exists(paste0("./acc/",AccID[i],".csv"))){
+      print("Success!")
+    }
+    else {print("Failed to create csv")
+    }
+  }else{print("File already exists, skipping to the next file.")}
+}
+
+
+lapply(1:196,get.html2)
 
 #tbl<- readHTMLTable("http://www.seed-db.com/investorgraph/investorview?investorid=4903702712287232", which=1)
 
@@ -93,12 +148,23 @@ for(i in 1:length(ls)){
   print(ls[i])
   df[i,1]<-gsub(".csv","",ls[i])
   if(exists("dat")){
-  df[i,2]<-sum(as.numeric(gsub(",", "",dat[,4])))
-  df[i,3]<-nrow(dat)
-  df[i,4]<-mean(as.numeric(gsub(",", "",dat[,4])))
-  df[i,5]<-median(as.numeric(gsub(",", "",dat[,4])))
+    df[i,2]<-sum(as.numeric(gsub(",", "",dat[,4])))
+    df[i,3]<-nrow(dat)
+    df[i,4]<-mean(as.numeric(gsub(",", "",dat[,4])))
+    df[i,5]<-median(as.numeric(gsub(",", "",dat[,4])))
   }
 }
+
+ls<-list.files("./csv/")
+ls<-gsub(".csv", "", ls)
+difs <- setdiff(InvName2,ls)
+uniq<-unique(InvName)
+difs <- setdiff(ls, InvName2)
+
+'%nin%' <- Negate('%in%')
+
+difs<-InvName2[InvName2 %nin% ls]
+
 
 max(df$TotalInvestment, na.rm=TRUE)
 #copy df, just in case
@@ -133,3 +199,20 @@ write.csv(df3,"../SeedDBinvestors.csv")
 # download.file(url, destfile = "data.htm", method="auto")
 # list.files()
 # getwd()
+
+#compare names
+
+#rerun without changes to see if any files were missed
+#confirm that missing csvs link to empty tables
+
+#identify and count duplicates
+df2<-data.frame(df2)
+colnames(df2)<-colnames(df)
+
+df3<-rbind(df, df2)
+
+df3
+
+NameCount <- data.frame(table(df3$InvName))
+dups<-NameCount[NameCount$Freq > 1,]
+dups<-dups[order(-dups$Freq),]

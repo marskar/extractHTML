@@ -127,9 +127,6 @@ ls<-list.files("./csv/")
 # nrow(dat)
 # dat[,4]
 # dat$Funding.roundsize....
-#initialize dataframe
-df<- data.frame(rep(NA,10), rep(NA,10), rep(NA,10), rep(NA,10), rep(NA,10))
-names(df)<-c("Name","TotalInvestment", "NumberOfInvestments", "Mean", "Median")
 
 # df[1,1]<-gsub(".csv","",ls[1])
 # df[1,2]<-sum(as.numeric(gsub(",", "",dat[,4])))
@@ -141,35 +138,128 @@ names(df)<-c("Name","TotalInvestment", "NumberOfInvestments", "Mean", "Median")
 # 
 # dat<-read.csv(ls[100])
 
-#This for loop works 
+
+#identify and count duplicates
+df2<-data.frame(df2)
+colnames(df2)<-colnames(df)
+
+df3<-rbind(df, df2)
+
+df3
+
+NameCount <- data.frame(table(df3$InvName))
+dups<-NameCount[NameCount$Freq > 1,]
+dups<-dups[order(-dups$Freq),]
+#initialize dataframe
+df4<- data.frame(rep(NA,10), rep(NA,10))
+
+# cr8df<-function(i){
+#   df4[i,1]<-as.character(dups$Var1[i])
+#   df4[i,2]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[1]
+#   df4[i,3]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[2]
+#   df4[i,4]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[3]
+#   df4[i,5]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[4]
+#   df4[i,6]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[5]
+#   df4[i,7]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[6]
+#   df4[i,8]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[7]  
+#   print(i)
+# }
+# lapply(1:739,cr8df)
+
+#Change df4 names
+names(df4)[1]<-"InvName"
+for(i in 1:7){
+names(df4)[1+i]<-paste0("InvID",i)
+}
+
+#For some reason the apply method did not work all the way through
+#I did it with a loop
+for(i in 1:739){
+  df4[i,1]<-as.character(dups$Var1[i])
+  df4[i,2]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[1]
+  df4[i,3]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[2]
+  df4[i,4]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[3]
+  df4[i,5]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[4]
+  df4[i,6]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[5]
+  df4[i,7]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[6]
+  df4[i,8]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[7]  
+  print(i)
+}
+#now I add csv to all ID values
+for(i in 1:739){
+  
+  print(i)
+  df4[i,-1][which(!is.na(df4[i,-1]))]<-paste0(df4[i,-1][which(!is.na(df4[i,-1]))],".csv")
+  
+}
+
+
+setwd("./invacc")
+getwd()
+
+write.csv(df4, file="dups.csv")
+
+setwd("./invacc")
+
+df4$InvName[124]<-"blisce"
+
+for (i in 1:739){
+files<-df4[i,-1]
+files<-files[!is.na(files)]
+files<-files[file.size(files)>5]
+files<-files[!is.na(files)]
+df_list <- lapply(files, function(x) {
+  if (file.size(x) > 5) {
+    read.csv(x, skip=1, header=FALSE)
+  }
+})
+
+write.csv(do.call(rbind,df_list), file = paste0("../dups/",df4$InvName[i],".csv"))
+print(i)
+}
+df4$InvName[124]
+#remove IDs with the same InvName
+!(df3$InvName %in% dups$Var1)
+df5<-df3[!(df3$InvName %in% dups$Var1),]
+
+#Get stats from csvs in dups folder
+#Turn df5 InvIDs into csv file names & use get stats from invacc
+setwd("..")
+ls<-list.files("./dups/")
+
+#The loop below fails whenever there are missing values
+#This generates lots of NAs in df7
+
+#initialize dataframe
+df7<- data.frame(rep(NA,10), rep(NA,10), rep(NA,10), rep(NA,10), rep(NA,10))
+names(df7)<-c("Name","TotalInvestment", "NumberOfInvestments", "Mean", "Median")
+
 for(i in 1:length(ls)){
   try(remove(dat))
-  try(dat<-read.csv(paste0("./csv/",ls[i])))
+  try(dat<-read.csv(paste0("./dups/",ls[i])))
   print(ls[i])
-  df[i,1]<-gsub(".csv","",ls[i])
+  df7[i,1]<-gsub(".csv","",ls[i])
   if(exists("dat")){
-    df[i,2]<-sum(as.numeric(gsub(",", "",dat[,4])))
-    df[i,3]<-nrow(dat)
-    df[i,4]<-mean(as.numeric(gsub(",", "",dat[,4])))
-    df[i,5]<-median(as.numeric(gsub(",", "",dat[,4])))
+    df7[i,2]<-sum(as.numeric(gsub(",", "",dat[,5])))
+    df7[i,3]<-nrow(dat)
+    df7[i,4]<-mean(as.numeric(gsub(",", "",dat[,5])))
+    df7[i,5]<-median(as.numeric(gsub(",", "",dat[,5])))
   }
 }
 
-ls<-list.files("./csv/")
-ls<-gsub(".csv", "", ls)
-difs <- setdiff(InvName2,ls)
-uniq<-unique(InvName)
-difs <- setdiff(ls, InvName2)
-
-'%nin%' <- Negate('%in%')
-
-difs<-InvName2[InvName2 %nin% ls]
-
-
-max(df$TotalInvestment, na.rm=TRUE)
-#copy df, just in case
-df2<-df
-colnames(df2)[1]<-"Investor"
+# ls<-list.files("./csv/")
+# ls<-gsub(".csv", "", ls)
+# difs <- setdiff(InvName2,ls)
+# uniq<-unique(InvName)
+# difs <- setdiff(ls, InvName2)
+# 
+# '%nin%' <- Negate('%in%')
+# 
+# difs<-InvName2[InvName2 %nin% ls]
+# 
+# 
+# max(df$TotalInvestment, na.rm=TRUE)
+# #copy df, just in case
 df3<-merge(df2,websites,by="Investor")
 df3<-df3[,-6]
 
@@ -200,117 +290,3 @@ write.csv(df3,"../SeedDBinvestors.csv")
 # list.files()
 # getwd()
 
-#compare names
-
-#rerun without changes to see if any files were missed
-#confirm that missing csvs link to empty tables
-
-#identify and count duplicates
-df2<-data.frame(df2)
-colnames(df2)<-colnames(df)
-
-df3<-rbind(df, df2)
-
-df3
-
-NameCount <- data.frame(table(df3$InvName))
-dups<-NameCount[NameCount$Freq > 1,]
-dups<-dups[order(-dups$Freq),]
-#initialize dataframe
-df4<- data.frame(rep(NA,10), rep(NA,10))
-
-# cr8df<-function(i){
-#   df4[i,1]<-as.character(dups$Var1[i])
-#   df4[i,2]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[1]
-#   df4[i,3]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[2]
-#   df4[i,4]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[3]
-#   df4[i,5]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[4]
-#   df4[i,6]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[5]
-#   df4[i,7]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[6]
-#   df4[i,8]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[7]  
-#   print(i)
-# }
-# lapply(1:739,cr8df)
-# names(df4)[1]<-"InvName"
-# for(i in 1:7){
-# names(df4)[1+i]<-paste0("InvID",i)
-# }
-
-#For some reason the apply method did not work all the way through
-#I filled in the rest of df4 with a loop
-for(i in 1:739){
-  df4[i,1]<-as.character(dups$Var1[i])
-  df4[i,2]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[1]
-  df4[i,3]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[2]
-  df4[i,4]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[3]
-  df4[i,5]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[4]
-  df4[i,6]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[5]
-  df4[i,7]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[6]
-  df4[i,8]<-as.vector(df3[which(df3$InvName==dups$Var1[i]),]$InvID)[7]  
-  print(i)
-}
-#now I add csv to all ID values
-for(i in 1:739){
-  
-  print(i)
-  df4[i,-1][which(!is.na(df4[i,-1]))]<-paste0(df4[i,-1][which(!is.na(df4[i,-1]))],".csv")
-  
-}
-
-
-
-add.csv<-function(i){
-  print(i)
-  df4[i,-1][which(!is.na(df4[i,-1]))]<-paste0(df4[i,-1][which(!is.na(df4[i,-1]))],".csv")
-}
-lapply(1:739,add.csv)
-for(1:length(!is.na(df4[1,-1])),read.csv(df4[i,-1][i]
-x<-df4[i,-1][which(!is.na(df4[i,-1]))]  
-paste0(x)
-setwd("./invacc")
-LeCamping<-system2("cat",x)                                         
-df4$InvName[739]                                                                             
-                                         
-x<-NA                                         
-catCSV<-function(i){
-  try(remove(x))
-  x<-paste(df4$InvName[i])
-    if(file.exists(paste0("./invacc/",df4[i,-1][1],".csv"))){
-      print("x1")
-      x1<-read.csv(paste0("./invacc/",df4[i,-1][1],".csv"))
-    }
-    if(file.exists(paste0("./invacc/",df4[i,-1][2],".csv"))){ 
-      print("x2")
-      x2<-read.csv(paste0("./invacc/",df4[i,-1][2],".csv"))
-    }    
-    if(file.exists(paste0("./invacc/",df4[i,-1][3],".csv"))){ 
-      print("x3")
-      x3<-read.csv(paste0("./invacc/",df4[i,-1][3],".csv"))
-    } else{x3<-rbind(x1,x2)
-      write.csv(x3, paste0("./dups/",x,".csv"))}   
-    if(file.exists(paste0("./invacc/",df4[i,-1][4],".csv"))){ 
-      print("x4")
-      x4<-read.csv(paste0("./invacc/",df4[i,-1][4],".csv"))
-    } else{x4<-rbind(x1,x2,x3)
-    write.csv(x3, paste0("./dups/",x,".csv"))}  
-    if(file.exists(paste0("./invacc/",df4[i,-1][5],".csv"))){ 
-      print("x5")
-      x5<-read.csv(paste0("./invacc/",df4[i,-1][5],".csv"))
-    } else{x5<-rbind(x1,x2,x3,x4)
-    write.csv(x5, paste0("./dups/",x,".csv"))}   
-    if(file.exists(paste0("./invacc/",df4[i,-1][6],".csv"))){ 
-      print("x6")
-      x6<-read.csv(paste0("./invacc/",df4[i,-1][6],".csv"))
-    } else{x6<-rbind(x1,x2,x3,x4,x5)
-      write.csv(x6, paste0("./dups/",x,".csv"))}
-    if(file.exists(paste0("./invacc/",df4[i,-1][7],".csv"))){ 
-      print("x7")
-      x7<-read.csv(paste0("./invacc/",df4[i,-1][7],".csv"))
-    } else{x7<-rbind(x1,x2,x3,x4,x5,x6)
-      write.csv(x7, paste0("./dups/",x,".csv"))}
-  print("x7")
-  x8<-rbind(x1,x2,x3,x4,x5,x6,x7)
-  write.csv(x8, paste0("./dups/",x,".csv"))
-}   
-
-catCSV(2)

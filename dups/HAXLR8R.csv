@@ -1,0 +1,117 @@
+"","V1","V2","V3","V4","V5","V6","V7","V8"
+"1",1,"HAXLR8R","WearPoint","25,000","seed","2013-01-01","Details",""
+"2",2,"HAXLR8R","Roadie Tuner","25,000","seed","2014-05-12","Details",""
+"3",3,"HAXLR8R","Loccie","25,000","venture","2012-02-01","Details",""
+"4",4,"HAXLR8R","Everpurse","1,000,000","seed","2014-05-18","Details",""
+"5",5,"HAXLR8R","Shaka","25,000","venture","2012-02-01","Details",""
+"6",6,"HAXLR8R","PortableScores","25,000","venture","2012-02-01","Details",""
+"7",7,"HAXLR8R","Vibease","25,000","seed","2013-02-01","Details",""
+"8",8,"HAXLR8R","Focus","25,000","seed","2013-05-12","Details",""
+"9",9,"HAXLR8R","Nomiku","25,000","venture","2012-02-01","Details",""
+"10",10,"HAXLR8R","Sassor","25,000","venture","2012-02-01","Details",""
+"11",11,"LaunchpadLA","Melon","25,000","venture","2012-02-01","Details","Exited"
+"12",12,"HAXLR8R","Blinkiverse","25,000","seed","2013-05-12","Details",""
+"13",13,"HAXLR8R","Hex","25,000","seed","2013-05-12","Details",""
+"14",14,"HAXLR8R","Everpurse","25,000","seed","2013-01-01","Details",""
+"15",1,"SOSV","Quitbit","105,000","seed","2014-01-08","Details",NA
+"16",2,"Amino Capital","Darma","","venture","2014-09-22","Details",NA
+"17",3,"SOSV","Yeelink","","seed","2013-08-31","Details",NA
+"18",4,"SOSV","Rational Robotics","","convertible_note","2015-01-13","Details",NA
+"19",5,"Hax","Yeelink","25,000","venture","2013-01-17","Details",NA
+"20",6,"Hax","Helios","","seed","2015-02-27","Details",NA
+"21",7,"SOSV","Rational Robotics","","venture","2013-11-12","Details",NA
+"22",8,"HAXLR8R","WearPoint","25,000","seed","2013-01-01","Details",NA
+"23",9,"Y Combinator","Nomiku","120,000","seed","2014-12-01","Details",NA
+"24",10,"HAXLR8R","Roadie Tuner","25,000","seed","2014-05-12","Details",NA
+"25",11,"HAXLR8R","Loccie","25,000","venture","2012-02-01","Details",NA
+"26",12,"SOSV","Helios","","venture","2015-09-25","Details",NA
+"27",13,"Betaspring","Quitbit","20,000","seed","2013-11-01","Details",NA
+"28",14,"HAXLR8R","Everpurse","1,000,000","seed","2014-05-18","Details",NA
+"29",15,"Hax","Molecule Synth","70,000","venture","2013-01-31","Details",NA
+"30",16,"Sequoia Capital","Makeblock","6,000,000","venture","2014-12-31","Details",NA
+"31",17,"Seven Peaks Ventures","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"32",18,"Drummond Road Capital","Kindara","1,250,000","venture","2014-11-04","Details",NA
+"33",19,"Vast Ventures","Kindara","1,250,000","venture","2014-11-04","Details",NA
+"34",20,"SOSV","Makeblock","","venture","2015-09-20","Details",NA
+"35",21,"SOSV","Makeblock","","seed","2013-09-30","Details",NA
+"36",22,"SOSV","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"37",23,"SOSV","Kindara","350,000","convertible_note","2012-10-01","Details",NA
+"38",24,"Service Provider Capital","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"39",25,"SOSV","Vigo","25,000","seed","2013-07-16","Details",NA
+"40",26,"SOSV","Kindara","1,250,000","venture","2014-11-04","Details",NA
+"41",27,"SOSV","Nomiku","","venture","2012-12-19","Details",NA
+"42",28,"SOSV","Syrmo","","seed","2013-12-20","Details",NA
+"43",29,"SOSV","LightUp","","venture","2013-02-01","Details",NA
+"44",30,"Hax","Avidbots","25,000","seed","2014-05-12","Details",NA
+"45",31,"SOSV","Dustcloud","30,000","seed","2014-03-07","Details",NA
+"46",32,"SOSV","Syrmo","","venture","2015-05-12","Details",NA
+"47",33,"Hax","Quitbit","50,000","seed","2014-01-23","Details",NA
+"48",34,"SOSV","Vibease","","seed","2014-08-01","Details",NA
+"49",35,"Samurai Incubate","Sassor","","seed","2010-10-02","Details",NA
+"50",36,"SOSV","Shot Stats","","venture","2015-06-11","Details",NA
+"51",37,"SOSV","Quitbit","50,000","seed","2014-01-23","Details",NA
+"52",38,"Hax","Kindara","","seed","2016-11-03","Details",NA
+"53",39,"Boston Seed Capital","Kindara","1,000,000","seed","2016-07-07","Details",NA
+"54",40,"PV Ventures","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"55",41,"AIA Konica Minolta Digital Health Accelerator","Darma","","non_equity_assistance","2016-02-29","Details",NA
+"56",42,"Hax","Niwa","50,000","seed","2014-01-08","Details",NA
+"57",43,"62 Mile Ventures","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"58",44,"Hax","Notch","25,000","seed","2013-01-01","Details",NA
+"59",45,"SOSV","Kindara","","seed","2016-11-03","Details",NA
+"60",46,"FG Angels","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"61",47,"MVI (MENA Venture Investments)","Kindara","1,250,000","venture","2014-11-04","Details",NA
+"62",48,"Crowdcube","Niwa","216,280","equity_crowdfunding","2016-12-29","Details",NA
+"63",49,"HAXLR8R","Shaka","25,000","venture","2012-02-01","Details",NA
+"64",50,"HAXLR8R","PortableScores","25,000","venture","2012-02-01","Details",NA
+"65",51,"SOSV","Kindara","","convertible_note","2015-03-18","Details",NA
+"66",52,"Shenzhen Capital Group","Makeblock","30,000,000","venture","2017-02-20","Details",NA
+"67",53,"SOSV","Kindara","1,000,000","seed","2016-07-07","Details",NA
+"68",54,"Marc Bell Ventures","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"69",55,"SOSV","Kindara","25,000","venture","2012-02-21","Details",NA
+"70",56,"Hax","Helios","","venture","2015-09-25","Details",NA
+"71",57,"Goodworks Ventures","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"72",58,"SOSV","Helios","","seed","2015-02-27","Details",NA
+"73",59,"Hax","Kindara","25,000","venture","2012-02-21","Details",NA
+"74",60,"Jon Staenberg","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"75",61,"Techstars","Rational Robotics","120,000","seed","2015-06-05","Details",NA
+"76",62,"MVI (MENA Venture Investments)","Kindara","5,300,000","seed","2015-08-19","Details",NA
+"77",63,"SOSV","Niwa","50,000","seed","2014-01-08","Details",NA
+"78",64,"Hax","Syrmo","25,000","seed","2014-05-12","Details",NA
+"79",65,"Hax","Rational Robotics","25,000","seed","2014-05-12","Details",NA
+"80",66,"HAXLR8R","Vibease","25,000","seed","2013-02-01","Details",NA
+"81",67,"SOSV","Shot Stats","50,000","seed","2013-12-01","Details",NA
+"82",68,"SOSV","Everpurse","1,000,000","seed","2014-05-18","Details",NA
+"83",69,"SOSV","Avidbots","25,000","seed","2014-05-12","Details",NA
+"84",70,"Hax","Darma","25,000","seed","2014-05-12","Details",NA
+"85",71,"Hax","Vigo","25,000","seed","2013-07-16","Details",NA
+"86",72,"HAXLR8R","Focus","25,000","seed","2013-05-12","Details",NA
+"87",73,"SOSV","Shot Stats","50,000","seed","2014-02-10","Details",NA
+"88",74,"SOSV","Helios","25,000","seed","2013-05-12","Details",NA
+"89",75,"Prototron","Shaka","11,640","seed","2012-08-14","Details",NA
+"90",76,"SOSV","Quitbit","","venture","2015-04-15","Details",NA
+"91",77,"HAXLR8R","Nomiku","25,000","venture","2012-02-01","Details",NA
+"92",78,"SOSV","Avidbots","","venture","2016-02-22","Details",NA
+"93",79,"SOSV","Dustcloud","52,000","seed","2013-06-22","Details",NA
+"94",80,"Hax","Kindara","350,000","convertible_note","2012-10-01","Details",NA
+"95",81,"Qualcomm Incorporated","Rational Robotics","120,000","seed","2015-06-05","Details",NA
+"96",82,"HAXLR8R","Sassor","25,000","venture","2012-02-01","Details",NA
+"97",83,"SOSV","Darma","25,000","seed","2014-05-12","Details",NA
+"98",84,"SOSV","Makeblock","25,000","venture","2012-02-21","Details",NA
+"99",85,"Giordano Bruno Contestabile","Nomiku","","venture","2012-12-19","Details",NA
+"100",86,"HAXLR8R","Blinkiverse","25,000","seed","2013-05-12","Details",NA
+"101",87,"Evolution Media Capital","Makeblock","30,000,000","venture","2017-02-20","Details",NA
+"102",88,"Techammer","Avidbots","","seed","2014-08-13","Details",NA
+"103",89,"HAXLR8R","Hex","25,000","seed","2013-05-12","Details",NA
+"104",90,"SOSV","Roadie Tuner","","seed","2013-07-01","Details",NA
+"105",91,"Hax","Makeblock","25,000","venture","2012-02-21","Details",NA
+"106",92,"Hax","Curio","25,000","seed","2013-08-01","Details",NA
+"107",93,"HAXLR8R","Everpurse","25,000","seed","2013-01-01","Details",NA
+"108",94,"SOSV","Yeelink","","venture","2015-09-01","Details",NA
+"109",95,"SOSV","Molecule Synth","70,000","venture","2013-01-31","Details",NA
+"110",96,"SOSV","Curio","25,000","seed","2013-08-01","Details",NA
+"111",97,"Hax","LightUp","25,000","seed","2013-05-12","Details",NA
+"112",98,"Hax","Helios","25,000","seed","2013-05-12","Details",NA
+"113",99,"Hax","Shot Stats","25,000","seed","2014-05-12","Details",NA
+"114",100,"SOSV","LightUp","","venture","2015-04-09","Details",NA
+"115",101,"Hax","Dustcloud","25,000","seed","2013-01-01","Details",NA
+"116",102,"SOSV","Yeelink","25,000","venture","2013-01-17","Details",NA
